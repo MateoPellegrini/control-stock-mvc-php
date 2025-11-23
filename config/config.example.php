@@ -6,4 +6,5 @@ return [
     'db_name' => 'control_stock',
     'db_user' => 'TU_USUARIO',
     'db_pass' => 'TU_PASSWORD',
+    'app_debug' => true, # Cambiar a false en producción
 ];

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // index.php - Front controller
 require __DIR__ . '/config/config.php';
 require __DIR__ . '/core/Database.php';
