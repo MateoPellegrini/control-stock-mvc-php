@@ -6,6 +6,9 @@ unset($_SESSION['error']);
 <div class="container mx-auto px-4 py-10">
     <div class="max-w-md mx-auto bg-white/10 backdrop-blur shadow-xl rounded-3xl overflow-hidden border border-white/10">
         <div class="px-6 py-5 border-b border-white/10 bg-gradient-to-r from-indigo-500/80 to-sky-500/80">
+            <div class="text-6xl text-white text-center mb-2">
+                <i class="fa-solid fa-cubes"></i>
+            </div>
             <h1 class="text-xl font-semibold text-white text-center">
                 Sistema de Control de Stock
             </h1>
@@ -64,7 +67,7 @@ unset($_SESSION['error']);
         </div>
 
         <div class="px-6 py-3 border-t border-white/10 text-center text-[11px] text-slate-300 bg-slate-900/60">
-            &copy; <?php echo date('Y'); ?> Sistema de Stock - Login inicial (MVC + PHP)
+            &copy; <?php echo date('Y'); ?> Sistema de Stock
         </div>
     </div>
 </div>
