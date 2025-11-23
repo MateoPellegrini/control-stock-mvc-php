@@ -116,4 +116,77 @@ class AuthController extends Controller {
 
         $this->view($view, $data);
     }
+
+    public function createUser() {
+        $this->requireLogin();
+        $this->requireRole(['admin']); // solo admin
+
+        // Traer roles disponibles
+        $roles = $this->userModel->getAllRoles();
+
+        // Mostrar formulario
+        $this->view('users/form', [
+            'roles' => $roles,
+        ]);
+    }
+
+    public function storeUser() {
+        $this->requireLogin();
+        $this->requireRole(['admin']); // solo admin
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        $username   = trim($_POST['username'] ?? '');
+        $email      = trim($_POST['email'] ?? '');
+        $password   = trim($_POST['password'] ?? '');
+        $password2  = trim($_POST['password_confirmation'] ?? '');
+        $roleId     = (int)($_POST['role_id'] ?? 0);
+        $isActive   = isset($_POST['is_active']) ? 1 : 0;
+
+        // Validaciones básicas
+        if ($username === '' || $email === '' || $password === '' || $password2 === '') {
+            $_SESSION['error'] = 'Todos los campos son obligatorios.';
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['error'] = 'El email no es válido.';
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        if ($password !== $password2) {
+            $_SESSION['error'] = 'Las contraseñas no coinciden.';
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        if ($roleId <= 0) {
+            $_SESSION['error'] = 'Debe seleccionar un rol.';
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        // Validar que no exista username ni email
+        if ($this->userModel->findByUsername($username)) {
+            $_SESSION['error'] = 'El nombre de usuario ya existe.';
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        if ($this->userModel->findByEmail($email)) {
+            $_SESSION['error'] = 'El email ya está en uso.';
+            $this->redirect('index.php?controller=auth&action=createUser');
+        }
+
+        // Crear usuario
+        $this->userModel->createUser([
+            'username'  => $username,
+            'email'     => $email,
+            'password'  => $password,
+            'role_id'   => $roleId,
+            'is_active' => $isActive,
+        ]);
+
+        $_SESSION['success'] = 'Usuario creado correctamente.';
+        $this->redirect('index.php?controller=auth&action=dashboard');
+    } 
 }

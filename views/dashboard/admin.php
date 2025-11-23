@@ -21,6 +21,10 @@ $topSelling     = $topSelling     ?? [];
             </p>
         </div>
         <div class="text-right">
+            <a href="index.php?controller=auth&action=createUser"
+            class="btn btn-sm btn-outline-light text-xs">
+                + Nuevo usuario
+            </a>
             <a href="index.php?controller=auth&action=logout"
                class="btn btn-sm btn-outline-light text-xs">
                 Cerrar sesión

@@ -15,6 +15,7 @@ class Controller {
 
     protected function requireLogin() {
         if (!isset($_SESSION['user_id'])) {
+            $_SESSION['error'] = 'Por favor, iniciá sesión para continuar.';
             $this->redirect('index.php?controller=auth&action=login');
         }
     }
