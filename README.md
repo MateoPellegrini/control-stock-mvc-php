@@ -69,5 +69,5 @@ Este proyecto está pensado como **práctica real** y también como **proyecto d
 1. **Clonar el repositorio**
 
 ```bash
-git clone https://github.com/TU_USUARIO/control-stock-mvc-php.git
+git clone https://github.com/MateoPellegrini/control-stock-mvc-php.git
 cd control-stock-mvc-php
