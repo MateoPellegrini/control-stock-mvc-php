@@ -12,6 +12,7 @@ require __DIR__ . '/models/Product.php';
 require __DIR__ . '/models/StockMovement.php';
 require __DIR__ . '/models/Purchase.php';
 require __DIR__ . '/models/Sale.php';
+require __DIR__ . '/models/Dashboard.php';
 
 
 require __DIR__ . '/controllers/AuthController.php';

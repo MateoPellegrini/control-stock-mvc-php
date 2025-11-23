@@ -50,27 +50,70 @@ class AuthController extends Controller {
         $username  = $_SESSION['username']  ?? 'Usuario';
         $roleName  = $_SESSION['role_name'] ?? 'desconocido';
 
+        $dashboardModel = new Dashboard();
+
+        // Datos comunes a varios roles
+        $productCounts = $dashboardModel->getProductCounts();
+        $lowStock      = $dashboardModel->getLowStockProducts(5);
+
         switch ($roleName) {
             case 'admin':
                 $view = 'dashboard/admin';
+                $data = [
+                    'username'        => $username,
+                    'roleName'        => $roleName,
+                    'productCounts'   => $productCounts,
+                    'lowStock'        => $lowStock,
+                    'salesToday'      => $dashboardModel->getSalesSummary(),
+                    'purchasesToday'  => $dashboardModel->getPurchasesSummary(),
+                    'lastMovements'   => $dashboardModel->getLastStockMovements(10),
+                    'topSelling'      => $dashboardModel->getTopSellingProducts(5, 30),
+                ];
                 break;
+
             case 'ventas':
                 $view = 'dashboard/ventas';
+                $data = [
+                    'username'      => $username,
+                    'roleName'      => $roleName,
+                    'productCounts' => $productCounts,
+                    'salesToday'    => $dashboardModel->getSalesSummary(),
+                    'topSelling'    => $dashboardModel->getTopSellingProducts(5, 30),
+                ];
                 break;
+
             case 'compras':
                 $view = 'dashboard/compras';
+                $data = [
+                    'username'        => $username,
+                    'roleName'        => $roleName,
+                    'productCounts'   => $productCounts,
+                    'lowStock'        => $lowStock,
+                    'purchasesToday'  => $dashboardModel->getPurchasesSummary(),
+                    'lastMovements'   => $dashboardModel->getLastStockMovements(10),
+                ];
                 break;
+
             case 'deposito':
                 $view = 'dashboard/deposito';
+                $data = [
+                    'username'      => $username,
+                    'roleName'      => $roleName,
+                    'productCounts' => $productCounts,
+                    'lowStock'      => $lowStock,
+                    'lastMovements' => $dashboardModel->getLastStockMovements(10),
+                ];
                 break;
+
             default:
                 $view = 'auth/dashboard';
+                $data = [
+                    'username'  => $username,
+                    'roleName'  => $roleName,
+                ];
                 break;
         }
 
-        $this->view($view, [
-            'username' => $username,
-            'roleName' => $roleName,
-        ]);
+        $this->view($view, $data);
     }
 }
