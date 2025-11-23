@@ -1,0 +1,71 @@
+# -----------------------------------
+#   ARCHIVOS PRIVADOS / SENSIBLES
+# -----------------------------------
+
+config/config.php
+*.env
+.env
+.env.local
+config.local.php
+database.sqlite
+
+# -----------------------------------
+#   DEPENDENCIAS
+# -----------------------------------
+
+/vendor/
+/node_modules/
+
+# -----------------------------------
+#   CARPETAS DEL SISTEMA / RUNTIME
+# -----------------------------------
+
+/storage/
+/cache/
+/tmp/
+/logs/
+/sessions/
+/uploads/
+/public/uploads/
+
+# Si tu MVC genera plantillas compiladas (ej. Smarty):
+# /templates_c/
+
+# -----------------------------------
+#   ARCHIVOS DE EDITORES
+# -----------------------------------
+
+.vscode/
+/.idea/
+/nbproject/
+/*.swp
+*.swo
+
+# -----------------------------------
+#   ARCHIVOS DE SISTEMA
+# -----------------------------------
+
+.DS_Store
+Thumbs.db
+
+# -----------------------------------
+#   COMPOSER / NPM
+# -----------------------------------
+
+composer.lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Mapas de fuente (si generás CSS/JS compilados)
+public/css/*.map
+public/js/*.map
+
+# -----------------------------------
+#   ARCHIVOS TEMPORALES
+# -----------------------------------
+
+*.tmp
+*.log
+*.bak
+*.old

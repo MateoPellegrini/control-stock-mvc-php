@@ -1,0 +1,24 @@
+# Normalizar finales de línea
+* text=auto eol=lf
+
+# Tratamiento especial por tipo de archivo
+*.php  text diff=php
+*.sql  text
+*.js   text
+*.css  text
+*.md   text
+*.json text
+*.yml  text
+*.yaml text
+
+# Imágenes como binario
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.svg  text
+
+# Forzar UTF-8 si querés
+*.php  working-tree-encoding=UTF-8
+*.html working-tree-encoding=UTF-8
+*.md   working-tree-encoding=UTF-8
